@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
 import addPost from '../../../api/addPost.js';
+import getPost from '../../../api/getPost.js';
 
 const ComponentsBody = (props)=>{
 
@@ -36,7 +37,8 @@ const onCreate = ()=>{
         date: time.getDay() + "." + time.getMonth() + "." + time.getUTCFullYear(),
         autor: autor
     }
-    addPost(data);
+    addPost(data).then(()=> getPost().then((response)=> props.toGetListPostSUCCESS(response.data)).catch(err => console.log(err)));
+    
 };
 
     return(
@@ -68,9 +70,9 @@ const onCreate = ()=>{
                 
             }
             <ComponentsBody.bodyInput>
-                <input type="text"  onChange = {onChangeTitle} Value="Title"/>
-                <ComponentsBody.inputText type="text" onChange = {onChangeBody} Value="Name"/>
-                <input type="text" onChange={onChangeAutor} Value="Autor"/>
+                Title: <input type="text"  onChange = {onChangeTitle} />
+                Text: <ComponentsBody.inputText type="text" onChange = {onChangeBody} />
+                Autor: <input type="text" onChange={onChangeAutor} />
                 <button onClick={onCreate}>Create</button>
             </ComponentsBody.bodyInput>
         </ComponentsBody.contentBody>
@@ -82,7 +84,6 @@ ComponentsBody.contentBody = styled.div`
     height:46%;
     overflow: scroll;
     background-color: white;
-    border: 1 solid green;
     margin-top: 0.5%;
     margin-left: 20%;
     margin-right: 20%;
@@ -98,12 +99,9 @@ ComponentsBody.contentBody = styled.div`
 ComponentsBody.bodyPost = styled.div`
     width: 100%;
     height: 26%;
-
     padding-left: 1%;
     padding-right: 1%;
     margin-top: 1%;
-    border: 1 solid black;
-
 `;
 
 ComponentsBody.postTitle = styled.div`

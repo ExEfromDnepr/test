@@ -2,12 +2,12 @@ import axios from 'axios';
 
 
 
-export default  () => {
+export default  (id) => {
 
     const options = {
 
         method: 'GET',
-        url: "https://simple-blog-api.crew.red/posts/1?_embed=comments"
+        url: "https://simple-blog-api.crew.red/posts/"+ id + "?_embed=comments"
 
     }
 

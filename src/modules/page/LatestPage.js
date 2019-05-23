@@ -12,14 +12,6 @@ function LatestPage({toPostItems, toPostId, toGetListPostSUCCESS, toDispathPostI
 
   const [loadingPost, setLoadingPost] = useState(false);
 
-  /*const data = {
-    id: 102,
-    title: " Мой Пост2",
-    body: "It's possible to integrate your Ghost publication with modern analytics It's possible to integrate your Ghost publication with modern analytics It's possible to integrate your Ghost publication with modern analytics It's possible to integrate your Ghost publication with modern analytics It's possible to integrate your Ghost publication with modern analytics It's possible to integrate your Ghost publication with modern analytics It's possible to integrate your Ghost publication with modern analytics It's possible to integrate your Ghost publication with modern analytics ",
-    date: "12/12/1212",
-    autor: "ExE2"
-  }*/
-
 useEffect(()=>{
 
     getPost().then((response)=> toGetListPostSUCCESS(response.data)).catch(err => console.log(err));
@@ -33,7 +25,7 @@ useEffect(()=>{
       return (
         <LatestPage.Content>
             <LatestTitle />
-            <LatestBody toPostItems={toPostItems}  toDispathPostId={toDispathPostId} toPostId={toPostId}/>
+            <LatestBody toPostItems={toPostItems} toGetListPostSUCCESS={toGetListPostSUCCESS}  toDispathPostId={toDispathPostId} toPostId={toPostId} />
 
         </LatestPage.Content>
       );
@@ -50,7 +42,6 @@ LatestPage.Content =  styled.div`
     position: fixed;
     background-color: #CCFFFF;
     flex-direction: column;
-    border: 1 solid black;
 `;
 
 const mapStateToProps = (state)=>({

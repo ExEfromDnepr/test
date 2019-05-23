@@ -17,7 +17,6 @@ ComponentsTitle.contentTitle = styled.div`
     text-align: center;
     font-size: auto;
     text-shadow: 2px 2px #808080;
-    border: 1 solid red;
 `;
 
 export default ComponentsTitle;

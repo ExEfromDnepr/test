@@ -2,18 +2,28 @@ import React,{useState} from 'react';
 import styled from 'styled-components';
 
 import addComents from '../../../api/addComents.js';
+import getComentsApi from '../../../api/getComenst.js';
 
 const ViewBody = (props)=>{
     const [userName, setUserName] = useState('none');
     const [message, setMessage] = useState('none');
 
+
+
     const onClickCreate = ()=>{
+
         const data = {
             postId: props.toPostId,
             userName: userName,
             body: message
         }
-        addComents(data);
+        addComents(data).then(()=> getComentsApi(props.toPostId).then((response)=> props.toGetComentsSUCCESS(response.data.comments)).catch(err => console.log(err)));
+
+
+
+
+        console.log(props.toPost);
+        console.log(props.toComents);
     };
 
     const onChangeName = (e) =>{
@@ -30,7 +40,7 @@ const ViewBody = (props)=>{
                 props.toPost.map((item)=>{
                     if(item.id === props.toPostId){
                         return(
-                            <div>
+                            <div key={item.id}>
                                 <ViewBody.bodyTitle>
                                     {item.title}
                                 </ViewBody.bodyTitle>
@@ -44,7 +54,7 @@ const ViewBody = (props)=>{
                                    props.toComents.map((item)=> {
                                         if(item.postId !== undefined && item.postId === props.toPostId && props.toComents !== undefined){
                                             return(
-                                                <ViewBody.bodyComents>
+                                                <ViewBody.bodyComents key={item.id}>
                                                     <p>Name: {item.userName}</p>
                                                     <p>{item.body}</p>
                                                 </ViewBody.bodyComents>
@@ -54,8 +64,8 @@ const ViewBody = (props)=>{
                                     })
                                 }
                             <ViewBody.bodyInputData>
-                            <input type="text" onChange={onChangeName} Value="Name"/>
-                            <input type="text" onChange={onChangemessage}Value="message"/>
+                             UserName: <input type="text" onChange={onChangeName} />
+                             Message:<input type="text" onChange={onChangemessage} />
                             <button onClick={onClickCreate}>Create</button>
                             </ViewBody.bodyInputData>
                             </div>
@@ -75,7 +85,6 @@ ViewBody.contentBody = styled.div`
     height:46%;
     overflow: scroll;
     background-color: white;
-    border: 1 solid green;
     margin-top: 0.5%;
     margin-left: 20%;
     margin-right: 20%;
@@ -120,4 +129,5 @@ ViewBody.bodyInputData = styled.div`
     display: flex;
     flex-direction: column;
 `;
+
 export default ViewBody;

@@ -14,23 +14,15 @@ import getComentsApi from '../../api/getComenst.js';
 const ViewPage = ({toPost, toComents,toPostId, toGetListPostSUCCESS, toGetComentsSUCCESS}, props)=>{
 
     const [loading, setLoading] = useState(false);
-    /*const data ={
-        postId:102,
-        userName: "Вася",
-        body: "Хуета ваш код"
-    };*/
 
     useEffect(()=>{
 
-        getComentsApi().then((response)=> toGetComentsSUCCESS(response.data.comments)).catch(err => console.log(err));
+        getComentsApi(toPostId).then((response)=> toGetComentsSUCCESS(response.data.comments)).catch(err => console.log(err));
         getPostApi().then((response)=> toGetListPostSUCCESS(response.data))
         .catch(err => console.log(err));
-        
+
         if( toComents){
             setLoading(true);
-            console.log("coment",toComents);
-            console.log("Post",toPost);
-            console.log(toPostId);
         }
             
     },[]);
@@ -39,7 +31,7 @@ const ViewPage = ({toPost, toComents,toPostId, toGetListPostSUCCESS, toGetComent
         return(
             <ViewPage.content>
                 <ViewTitle />
-                <ViewBody toPost={toPost} toComents={toComents} toPostId={toPostId}/>
+                <ViewBody toPost={toPost} toComents={toComents} toPostId={toPostId} toGetListPostSUCCESS={toGetListPostSUCCESS} toGetComentsSUCCESS={toGetComentsSUCCESS} setLoading ={setLoading}/>
             </ViewPage.content>
         )
     }else{
@@ -54,7 +46,6 @@ ViewPage.content =  styled.div`
     position: fixed;
     background-color: #CCFFFF;
     flex-direction: column;
-    border: 1 solid black;
 `;
 
 const mapStateToProps = (state) => ({

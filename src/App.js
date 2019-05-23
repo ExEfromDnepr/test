@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import LatestPage from './modules/page/LatestPage.js';
 import ViewPage from './modules/page/ViewPage.js';
 
-function App(props) {
+const App = (props)=> {
 
 
   return (
