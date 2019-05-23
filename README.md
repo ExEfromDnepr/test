@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+## npm install --s
+    "axios"
+    "react"
+    "react-dom"
+    "react-redux"
+    "react-router-dom"
+    "react-scripts"
+    "redux"
+    "redux-logger"
+    "redux-thunk"
+    "styled-components"
+    
 ## Available Scripts
 
 In the project directory, you can run:
